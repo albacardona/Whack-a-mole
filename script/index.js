@@ -1,4 +1,4 @@
-// window.addEventListener('load', (event) => { //ON CLICK DESPUÉS
+window.addEventListener('load', (event) => { //ON CLICK DESPUÉS
     const moles = [
         'Mole0.png',
         'Mole1.png',
@@ -11,32 +11,87 @@
         'Mole8.png',
     ];
 
+
+//      VARIABLES
     let mixedMoles = [];
     let currentMole = '';
-    let startButton = document.getElementById('start-button')
-    let myMusic = new Audio ('/images/main-loop.wav')
+    let buttonLeft = document.getElementById('button-left');
+    let buttonRight = document.getElementById('button-right');
+    let score = document.getElementById('score');
+    let myMusic = new Audio('/images/main-loop.wav');
 
+//      FUNCIONES
 
     shuffleMoles = () => {
         mixedMoles = moles.sort((a, b) => 0.5 - Math.random());
         currentMole = mixedMoles[0];
     };
 
-    startButton.onclick = () => {
-        startGame();
-        startButton.style.display = 'none';
-        myMusic.play();
-    };
+    setStartBtn = () => {
+        buttonLeft.src = '/images/Pause.png';
+        buttonLeft.className = 'btn-pause';
+    }
+
+    setPauseBtn = () => {
+        buttonLeft.src = '/images/Start.png';
+        buttonLeft.className = 'btn-start';
+    }
+
+    setMuteBtn = () => {
+        buttonRight.src = '/images/Unmute.png';
+        buttonRight.className = 'btn-unmute';
+    }
+
+    setUnmuteBtn = () => {
+        buttonRight.src = '/images/Mute.png';
+        buttonRight.className = 'btn-mute';
+    }
+
 
     startGame = () => {
         setInterval(() => {
             shuffleMoles();
             document.getElementById('moles').src = `/images/${currentMole}`;
+            console.log(currentMole)
         }, 2000);
     };
 
     whackMole = () => {
-        document.getElementById('moles').src = '/images/Background.png';
+        if (document.getElementById('moles').src === '/images/Mole0.png') {
+            document.getElementById('moles').src = '/images/Background.png';
+        };
+    };
+
+
+//      BOTONES
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'w') {
+            whackMole()
+        }
+    })
+
+    buttonLeft.onclick = () => {
+        if(buttonLeft.className === 'btn-start') {
+            startGame();
+            setStartBtn();
+            myMusic.play();
+        } else if(buttonLeft.className === 'btn-pause') {
+            // pauseGame();
+            setPauseBtn();
+            setUnmuteBtn();
+            myMusic.pause();
+        }
+    };
+
+    buttonRight.onclick = () => {
+        if(buttonRight.className === 'btn-mute' && buttonLeft.className === 'btn-pause') {
+            setMuteBtn();
+            myMusic.pause();
+        } else if(buttonRight.className === 'btn-unmute') {
+            setUnmuteBtn();
+            myMusic.play();
+        }
     };
 
 
@@ -149,4 +204,4 @@
     // });
 
 
-// })
+})
