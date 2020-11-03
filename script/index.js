@@ -11,20 +11,36 @@ window.addEventListener('load', (event) => {
     let moles = [...allMoles];
     let countdown = document.querySelector('#time');
     let score = document.getElementById('score');
+    let lastMole = '';
     
 
 
     //      FUNCIONES
 
+    randomTime = (min, max) => {
+        return Math.round(Math.random() * (max - min) + min)
+    }
+
     shuffleMoles = () => {
         mixedMoles = moles.sort((a, b) => 0.5 - Math.random());
         currentMole = mixedMoles[0];
+        // console.log(currentMole)
+        if(currentMole === lastMole) {
+            console.log('Repetido')
+            shuffleMoles();
+        }
+        lastMole = currentMole;
         return currentMole;
     };
 
     showMoles = () => {
+        let time = randomTime(500, 1000);
         let mole = shuffleMoles();
         mole.style.display = 'block';
+        setTimeout(() => {
+            mole.style.display = 'none';
+            showMoles();
+        }, time)
     }
 
     setStartBtn = () => {
@@ -48,7 +64,7 @@ window.addEventListener('load', (event) => {
     }
 
     startTimer = () => {
-        let timer = 90, minutes, seconds;
+        let timer = 5, minutes, seconds;
         setInterval(() => {
             minutes = parseInt(timer / 60, 10);
             seconds = parseInt(timer % 60, 10);
@@ -56,7 +72,7 @@ window.addEventListener('load', (event) => {
             minutes = minutes < 10 ? "0" + minutes : minutes;
             seconds = seconds < 10 ? "0" + seconds : seconds;
     
-            countdown.textContent = `TIME: ${minutes}:${seconds}`
+            countdown.textContent = `TIME: ${minutes}:${seconds}`;
     
             if (--timer < 0) {
                 timer = 0;
@@ -64,13 +80,28 @@ window.addEventListener('load', (event) => {
         }, 1000);
     }
 
+    hideAllMoles = () => {
+        moles.forEach((mole) => {
+            mole.style.display = 'none';
+        });
+    };
+
+    // timeUp = () => {
+    //     if(countdown.textContent === '00:00') {
+    //         console.log('TIME UP!')
+    //     }
+    // }
+
     startGame = () => {
         startTimer();
-        score = 0;
-        setInterval(() => {
-            showMoles();
-        }, 1000);
+        hideAllMoles();
+        showMoles();
+        // setInterval(() => { // aparecen varios topos a la vez => NIVEL DIFÍCIL
+        //     showMoles();
+        // }, 2000);
     };
+
+    
 
     //      BOTONES
 
