@@ -10,22 +10,23 @@ window.addEventListener('load', (event) => {
     let allMoles = document.querySelectorAll('.mole');
     let moles = [...allMoles];
     let countdown = document.querySelector('#time');
-    let score = document.getElementById('score');
+    let playTime = 5;
+    let scoreDiv = document.getElementById('score');
     let lastMole = '';
-    
+    let score = 0;
 
 
     //      FUNCIONES
 
     randomTime = (min, max) => {
         return Math.round(Math.random() * (max - min) + min)
-    }
+    };
 
     shuffleMoles = () => {
         mixedMoles = moles.sort((a, b) => 0.5 - Math.random());
         currentMole = mixedMoles[0];
         // console.log(currentMole)
-        if(currentMole === lastMole) {
+        if (currentMole === lastMole) {
             console.log('Repetido')
             shuffleMoles();
         }
@@ -34,51 +35,57 @@ window.addEventListener('load', (event) => {
     };
 
     showMoles = () => {
-        let time = randomTime(500, 1000);
+        let time = randomTime(700, 2000);
         let mole = shuffleMoles();
         mole.style.display = 'block';
         setTimeout(() => {
             mole.style.display = 'none';
             showMoles();
         }, time)
-    }
+    };
 
     setStartBtn = () => {
         buttonLeft.src = '/images/Pause.png';
         buttonLeft.className = 'btn-pause';
-    }
+    };
 
     setPauseBtn = () => {
         buttonLeft.src = '/images/Start.png';
         buttonLeft.className = 'btn-start';
-    }
+    };
 
     setMuteBtn = () => {
         buttonRight.src = '/images/Unmute.png';
         buttonRight.className = 'btn-unmute';
-    }
+    };
 
     setUnmuteBtn = () => {
         buttonRight.src = '/images/Mute.png';
         buttonRight.className = 'btn-mute';
-    }
+    };
 
     startTimer = () => {
-        let timer = 5, minutes, seconds;
+        let timer = playTime,
+            minutes, seconds;
         setInterval(() => {
             minutes = parseInt(timer / 60, 10);
             seconds = parseInt(timer % 60, 10);
-    
+
             minutes = minutes < 10 ? "0" + minutes : minutes;
             seconds = seconds < 10 ? "0" + seconds : seconds;
-    
+
             countdown.textContent = `TIME: ${minutes}:${seconds}`;
-    
+
             if (--timer < 0) {
                 timer = 0;
+                
             }
         }, 1000);
-    }
+    };
+
+    timeUp = () => {
+
+    };
 
     hideAllMoles = () => {
         moles.forEach((mole) => {
@@ -86,30 +93,43 @@ window.addEventListener('load', (event) => {
         });
     };
 
-    // timeUp = () => {
-    //     if(countdown.textContent === '00:00') {
-    //         console.log('TIME UP!')
-    //     }
-    // }
+    addScore = () => {
+        score += 5;
+        if(score < 10) {
+            scoreDiv.textContent = `SCORE: 000${score}`;
+        } else if (score < 100 && score >= 10) {
+            scoreDiv.textContent = `SCORE: 00${score}`;
+        } else if (score < 1000 && score >= 100) {
+            scoreDiv.textContent = `SCORE: 0${score}`;
+        }
+    };
+
+    whackMole = () => {
+        addScore()
+        lastMole.style.display = 'none';
+    };
 
     startGame = () => {
         startTimer();
         hideAllMoles();
-        showMoles();
+        setTimeout(() => {
+            showMoles();
+        }, 500)
+        
         // setInterval(() => { // aparecen varios topos a la vez => NIVEL DIFÍCIL
         //     showMoles();
         // }, 2000);
     };
 
-    
 
     //      BOTONES
 
-    document.addEventListener('keydown', (event) => {
-        if (event.key === 'w') {
-            whackMole()
-        }
-    })
+    moles.forEach((mole) => {
+        mole.onclick = () => {
+        whackMole();
+        console.log('CLICK')
+        };
+    });
 
     buttonLeft.onclick = () => {
         if (buttonLeft.className === 'btn-start') {
@@ -134,61 +154,4 @@ window.addEventListener('load', (event) => {
         }
     };
 
-    
-
-    // if (document.getElementById('moles').src === '/images/Mole0.png') {
-    //     document.addEventListener('keydown', (event) => {
-    //         if (event.key === 'w') {
-    //             document.getElementById('moles').src = '/images/Background.png';
-    //         }
-    //     })
-    // } else if (document.getElementById('moles').src === '/images/Mole1.png') {
-    //     document.addEventListener('keydown', (event) => {
-    //         if (event.key === 's') {
-    //             document.getElementById('moles').src = '/images/Background.png';
-    //         }
-    //     })
-    // } else if (document.getElementById('moles').src === '/images/Mole2.png') {
-    //     document.addEventListener('keydown', (event) => {
-    //         if (event.key === 'z') {
-    //             document.getElementById('moles').src = '/images/Background.png';
-    //         }
-    //     })
-    // } else if (document.getElementById('moles').src === '/images/Mole3.png') {
-    //     document.addEventListener('keydown', (event) => {
-    //         if (event.key === 'e') {
-    //             document.getElementById('moles').src = '/images/Background.png';
-    //         }
-    //     })
-    // } else if (document.getElementById('moles').src === '/images/Mole4.png') {
-    //     document.addEventListener('keydown', (event) => {
-    //         if (event.key === 'd') {
-    //             document.getElementById('moles').src = '/images/Background.png';
-    //         }
-    //     })
-    // } else if (document.getElementById('moles').src === '/images/Mole5.png') {
-    //     document.addEventListener('keydown', (event) => {
-    //         if (event.key === 'x') {
-    //             document.getElementById('moles').src = '/images/Background.png';
-    //         }
-    //     })
-    // } else if (document.getElementById('moles').src === '/images/Mole6.png') {
-    //     document.addEventListener('keydown', (event) => {
-    //         if (event.key === 'r') {
-    //             document.getElementById('moles').src = '/images/Background.png';
-    //         }
-    //     })
-    // } else if (document.getElementById('moles').src === '/images/Mole7.png') {
-    //     document.addEventListener('keydown', (event) => {
-    //         if (event.key === 'f') {
-    //             document.getElementById('moles').src = '/images/Background.png';
-    //         }
-    //     })
-    // } else if (document.getElementById('moles').src === '/images/Mole8.png') {
-    //     document.addEventListener('keydown', (event) => {
-    //         if (event.key === 'c') {
-    //             document.getElementById('moles').src = '/images/Background.png';
-    //         }
-    //     })
-    // }
-})
+});

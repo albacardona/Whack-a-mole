@@ -4,6 +4,8 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: 'Press Start 2P';
+    color: #FFF8EB;
     box-sizing: border-box;
 }
 
@@ -32,7 +34,6 @@ header {
 
 .nav {
     width: 1000px;
-    font-family: 'Press Start 2P';
     font-size: 16px;
     display: flex;
     align-items: center;
@@ -40,8 +41,13 @@ header {
     padding: 0px 50px;
 }
 
+.game-finished {
+    position: absolute;
+    background-color:  rgba(0,0,0,0.5);
+
+}
+
 .counter {
-    color: #FFF8EB;
     border: 2px solid #FFF8EB;
     padding: 7px 10px;
     box-shadow: inset 0px 1px 5px 1px rgba(0,0,0,0.5);
@@ -98,6 +104,6 @@ header {
 .Alba {
     text-align: center;
     margin-top: 40px;
-    font-family: 'Press Start 2P';
+    color: black;
     font-size: 0.8rem;
 }
