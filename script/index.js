@@ -5,7 +5,7 @@ window.addEventListener('load', (event) => {
     let currentMole = '';
     let buttonLeft = document.getElementById('button-left');
     let buttonRight = document.getElementById('button-right');
-    let myMusic = new Audio('/images/main-loop.wav');
+    let myMusic = new Audio('images/main-loop.wav');
     myMusic.volume = 0.05;
     let allMoles = document.querySelectorAll('.mole');
     let moles = [...allMoles];
@@ -45,22 +45,22 @@ window.addEventListener('load', (event) => {
     };
 
     setStartBtn = () => {
-        buttonLeft.src = '/images/Pause.png';
+        buttonLeft.src = 'images/Pause.png';
         buttonLeft.className = 'btn-pause';
     };
 
     setPauseBtn = () => {
-        buttonLeft.src = '/images/Start.png';
+        buttonLeft.src = 'images/Start.png';
         buttonLeft.className = 'btn-start';
     };
 
     setMuteBtn = () => {
-        buttonRight.src = '/images/Unmute.png';
+        buttonRight.src = 'images/Unmute.png';
         buttonRight.className = 'btn-unmute';
     };
 
     setUnmuteBtn = () => {
-        buttonRight.src = '/images/Mute.png';
+        buttonRight.src = 'images/Mute.png';
         buttonRight.className = 'btn-mute';
     };
 
