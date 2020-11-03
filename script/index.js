@@ -152,7 +152,7 @@ window.addEventListener('load', (event) => {
     };
 
     buttonRight.onclick = () => {
-        if (buttonRight.className === 'btn-mute' && buttonLeft.className === 'btn-pause') {
+        if (buttonRight.className === 'btn-mute') {
             setMuteBtn();
             myMusic.pause();
         } else if (buttonRight.className === 'btn-unmute') {
