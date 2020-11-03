@@ -41,10 +41,16 @@ header {
     padding: 0px 50px;
 }
 
+#timeup {
+    display: none;
+}
+
 .game-finished {
     position: absolute;
-    background-color:  rgba(0,0,0,0.5);
-
+    background-color: rgba(250,250,250,0.4);
+    font-size: 5rem;
+    padding: 190px 176px 328px;
+    margin: 54px;
 }
 
 .counter {
@@ -52,6 +58,10 @@ header {
     padding: 7px 10px;
     box-shadow: inset 0px 1px 5px 1px rgba(0,0,0,0.5);
     background-color: #556467;
+}
+
+.unclickable {
+    opacity: 0.9;
 }
 
 

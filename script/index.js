@@ -10,10 +10,12 @@ window.addEventListener('load', (event) => {
     let allMoles = document.querySelectorAll('.mole');
     let moles = [...allMoles];
     let countdown = document.querySelector('#time');
-    let playTime = 5;
+    let playTime = 89;
     let scoreDiv = document.getElementById('score');
     let lastMole = '';
     let score = 0;
+    let timeUp = document.getElementById('timeup');
+    console.log(timeUp)
 
 
     //      FUNCIONES
@@ -45,8 +47,10 @@ window.addEventListener('load', (event) => {
     };
 
     setStartBtn = () => {
-        buttonLeft.src = 'images/Pause.png';
-        buttonLeft.className = 'btn-pause';
+        buttonLeft.src = 'images/Start2.png'
+        buttonLeft.className = 'unclickable';
+        // buttonLeft.src = 'images/Pause.png';
+        // buttonLeft.className = 'btn-pause';
     };
 
     setPauseBtn = () => {
@@ -78,13 +82,17 @@ window.addEventListener('load', (event) => {
 
             if (--timer < 0) {
                 timer = 0;
-                
+                return 0
             }
         }, 1000);
     };
 
-    timeUp = () => {
+   
 
+    hideFirstMole = () => {
+        if (moles[0].style.display === 'block') {
+            moles[0].style.display = 'none';
+        }
     };
 
     hideAllMoles = () => {
@@ -95,7 +103,7 @@ window.addEventListener('load', (event) => {
 
     addScore = () => {
         score += 5;
-        if(score < 10) {
+        if (score < 10) {
             scoreDiv.textContent = `SCORE: 000${score}`;
         } else if (score < 100 && score >= 10) {
             scoreDiv.textContent = `SCORE: 00${score}`;
@@ -112,22 +120,22 @@ window.addEventListener('load', (event) => {
     startGame = () => {
         startTimer();
         hideAllMoles();
+        endGame();
         setTimeout(() => {
             showMoles();
         }, 500)
-        
-        // setInterval(() => { // aparecen varios topos a la vez => NIVEL DIFÍCIL
-        //     showMoles();
-        // }, 2000);
     };
 
+    endGame = () => {
+        timeUp.className = 'game-finished';
+    }
 
     //      BOTONES
 
     moles.forEach((mole) => {
         mole.onclick = () => {
-        whackMole();
-        console.log('CLICK')
+            whackMole();
+            console.log('CLICK')
         };
     });
 
@@ -136,11 +144,10 @@ window.addEventListener('load', (event) => {
             startGame();
             setStartBtn();
             myMusic.play();
-        } else if (buttonLeft.className === 'btn-pause') {
-            // pauseGame();
-            setPauseBtn();
-            setUnmuteBtn();
-            myMusic.pause();
+        // } else if (buttonLeft.className === 'btn-pause') {
+        //     setPauseBtn();
+        //     setUnmuteBtn();
+        //     myMusic.pause();
         }
     };
 
