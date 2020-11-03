@@ -82,6 +82,7 @@ header {
 
 .mole {
     position: absolute;
+    display: none;
 }
 
 .buttons {

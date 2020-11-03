@@ -1,31 +1,31 @@
-window.addEventListener('load', (event) => { //ON CLICK DESPUÉS
-    const moles = [
-        'Mole0.png',
-        'Mole1.png',
-        'Mole2.png',
-        'Mole3.png',
-        'Mole4.png',
-        'Mole5.png',
-        'Mole6.png',
-        'Mole7.png',
-        'Mole8.png',
-    ];
+window.addEventListener('load', (event) => {
 
-
-//      VARIABLES
+    //      VARIABLES
     let mixedMoles = [];
     let currentMole = '';
     let buttonLeft = document.getElementById('button-left');
     let buttonRight = document.getElementById('button-right');
-    let score = document.getElementById('score');
     let myMusic = new Audio('/images/main-loop.wav');
+    myMusic.volume = 0.05;
+    let allMoles = document.querySelectorAll('.mole');
+    let moles = [...allMoles];
+    let countdown = document.querySelector('#time');
+    let score = document.getElementById('score');
+    
 
-//      FUNCIONES
+
+    //      FUNCIONES
 
     shuffleMoles = () => {
         mixedMoles = moles.sort((a, b) => 0.5 - Math.random());
         currentMole = mixedMoles[0];
+        return currentMole;
     };
+
+    showMoles = () => {
+        let mole = shuffleMoles();
+        mole.style.display = 'block';
+    }
 
     setStartBtn = () => {
         buttonLeft.src = '/images/Pause.png';
@@ -47,23 +47,32 @@ window.addEventListener('load', (event) => { //ON CLICK DESPUÉS
         buttonRight.className = 'btn-mute';
     }
 
+    startTimer = () => {
+        let timer = 90, minutes, seconds;
+        setInterval(() => {
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+    
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+    
+            countdown.textContent = `TIME: ${minutes}:${seconds}`
+    
+            if (--timer < 0) {
+                timer = 0;
+            }
+        }, 1000);
+    }
 
     startGame = () => {
+        startTimer();
+        score = 0;
         setInterval(() => {
-            shuffleMoles();
-            document.getElementById('moles').src = `/images/${currentMole}`;
-            console.log(currentMole)
-        }, 2000);
+            showMoles();
+        }, 1000);
     };
 
-    whackMole = () => {
-        if (document.getElementById('moles').src === '/images/Mole0.png') {
-            document.getElementById('moles').src = '/images/Background.png';
-        };
-    };
-
-
-//      BOTONES
+    //      BOTONES
 
     document.addEventListener('keydown', (event) => {
         if (event.key === 'w') {
@@ -72,11 +81,11 @@ window.addEventListener('load', (event) => { //ON CLICK DESPUÉS
     })
 
     buttonLeft.onclick = () => {
-        if(buttonLeft.className === 'btn-start') {
+        if (buttonLeft.className === 'btn-start') {
             startGame();
             setStartBtn();
             myMusic.play();
-        } else if(buttonLeft.className === 'btn-pause') {
+        } else if (buttonLeft.className === 'btn-pause') {
             // pauseGame();
             setPauseBtn();
             setUnmuteBtn();
@@ -85,15 +94,16 @@ window.addEventListener('load', (event) => { //ON CLICK DESPUÉS
     };
 
     buttonRight.onclick = () => {
-        if(buttonRight.className === 'btn-mute' && buttonLeft.className === 'btn-pause') {
+        if (buttonRight.className === 'btn-mute' && buttonLeft.className === 'btn-pause') {
             setMuteBtn();
             myMusic.pause();
-        } else if(buttonRight.className === 'btn-unmute') {
+        } else if (buttonRight.className === 'btn-unmute') {
             setUnmuteBtn();
             myMusic.play();
         }
     };
 
+    
 
     // if (document.getElementById('moles').src === '/images/Mole0.png') {
     //     document.addEventListener('keydown', (event) => {
@@ -150,58 +160,4 @@ window.addEventListener('load', (event) => { //ON CLICK DESPUÉS
     //         }
     //     })
     // }
-
-
-
-    // document.addEventListener('keydown', (event) => {
-    //     switch (event.code) {
-    //         case 'KeyW':
-    //             if (document.getElementById('moles').src === '/images/Mole0.png') {
-    //                 document.getElementById('moles').src = '/images/Background.png';
-    //             }
-    //         break;
-    //         case 'KeyS':
-    //             if (document.getElementById('moles').src === '/images/Mole1.png') {
-    //                 document.getElementById('moles').src = '/images/Background.png';
-    //             }
-    //         break;
-    //         case 'KeyZ':
-    //             if (document.getElementById('moles').src === '/images/Mole2.png') {
-    //                 document.getElementById('moles').src = '/images/Background.png';
-    //             }
-    //         break;
-    //         case 'KeyE':
-    //             if (document.getElementById('moles').src === '/images/Mole3.png') {
-    //                 document.getElementById('moles').src = '/images/Background.png';
-    //             }
-    //         break;
-    //         case 'KeyD':
-    //             if (document.getElementById('moles').src === '/images/Mole4.png') {
-    //                 document.getElementById('moles').src = '/images/Background.png';
-    //             }
-    //         break;
-    //         case 'KeyX':
-    //             if (document.getElementById('moles').src === '/images/Mole5.png') {
-    //                 document.getElementById('moles').src = '/images/Background.png';
-    //             }
-    //         break;
-    //         case 'KeyR':
-    //             if (document.getElementById('moles').src === '/images/Mole6.png') {
-    //                 document.getElementById('moles').src = '/images/Background.png';
-    //             }
-    //         break;
-    //         case 'KeyF':
-    //             if (document.getElementById('moles').src === '/images/Mole7.png') {
-    //                 document.getElementById('moles').src = '/images/Background.png';
-    //             }
-    //         break;
-    //         case 'KeyC':
-    //             if (document.getElementById('moles').src === '/images/Mole8.png') {
-    //                 document.getElementById('moles').src = '/images/Background.png';
-    //             }
-    //         break;
-    //     };
-    // });
-
-
 })
