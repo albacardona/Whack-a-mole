@@ -9,15 +9,10 @@ window.addEventListener('load', (event) => {
 
     let buttonLeft = document.getElementById('button-left');
     let buttonRight = document.getElementById('button-right');
-    let myMusic = new Audio('images/main-loop.wav');
-    myMusic.volume = 0.1;
-    let smash = new Audio('images/Jump9.mp3');
-    smash.volume = 0.5;
-    let endSound = new Audio('images/Coins6.mp3');
     
     let countdown = document.querySelector('#time');
     let interval = 0;
-    let playTime = 90;
+    let playTime = 5;
     let timeUp = document.getElementById('timeup');
     let endGameTime = playTime * 1000;
 
@@ -25,6 +20,13 @@ window.addEventListener('load', (event) => {
     let score = 0;
     let totalScore = '';
     let finalScore = document.getElementById('final-score');
+
+    let myMusic = new Audio('images/main-loop.mp3');
+    myMusic.volume = 0.1;
+    let smash = new Audio('images/Jump9.mp3');
+    smash.volume = 0.5;
+    let endSound = new Audio('images/timeuponce.mp3');
+    endSound = 0.1;
     
 
 
@@ -115,7 +117,8 @@ window.addEventListener('load', (event) => {
         timeUp.removeAttribute('id');
         finalScore.textContent = scoreDiv.textContent;
         endSound.play();
-    }
+        myMusic.pause();
+    };
 
     //      SCORE
 
@@ -137,6 +140,7 @@ window.addEventListener('load', (event) => {
         lastMole.style.display = 'none';
     };
 
+
     //      GAME
 
     startGame = () => {
@@ -154,8 +158,7 @@ window.addEventListener('load', (event) => {
         hideAllMoles();
         timeup();
     }
-        
-    
+
 
     //      BUTTONS
 
@@ -189,5 +192,4 @@ window.addEventListener('load', (event) => {
             myMusic.play();
         }
     };
-
 });
