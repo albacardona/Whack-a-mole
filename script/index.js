@@ -10,7 +10,10 @@ window.addEventListener('load', (event) => {
     let buttonLeft = document.getElementById('button-left');
     let buttonRight = document.getElementById('button-right');
     let myMusic = new Audio('images/main-loop.wav');
-    myMusic.volume = 0.05;
+    myMusic.volume = 0.1;
+    let smash = new Audio('images/Jump9.mp3');
+    smash.volume = 0.5;
+    let endSound = new Audio('images/Coins6.mp3');
     
     let countdown = document.querySelector('#time');
     let interval = 0;
@@ -111,6 +114,7 @@ window.addEventListener('load', (event) => {
         timeUp.className = 'game-finished';
         timeUp.removeAttribute('id');
         finalScore.textContent = scoreDiv.textContent;
+        endSound.play();
     }
 
     //      SCORE
@@ -136,6 +140,7 @@ window.addEventListener('load', (event) => {
     //      GAME
 
     startGame = () => {
+        score = 0;
         startTimer(printTime);
         hideAllMoles();
         setTimeout(() => {
@@ -157,7 +162,9 @@ window.addEventListener('load', (event) => {
     moles.forEach((mole) => {
         mole.onclick = () => {
             whackMole();
-            console.log('CLICK')
+            if(buttonRight.className === 'btn-mute') {
+                smash.play();
+            }
         };
     });
 
@@ -174,7 +181,7 @@ window.addEventListener('load', (event) => {
     };
 
     buttonRight.onclick = () => {
-        if (buttonRight.className === 'btn-mute') {
+        if (buttonRight.className === 'btn-mute' && buttonLeft.className !== 'btn-start') {
             setMuteBtn();
             myMusic.pause();
         } else if (buttonRight.className === 'btn-unmute') {
