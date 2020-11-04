@@ -48,9 +48,15 @@ header {
 .game-finished {
     position: absolute;
     background-color: rgba(250,250,250,0.4);
+    text-align: center;
     font-size: 5rem;
-    padding: 190px 176px 328px;
+    padding: 190px 176px 230px;
     margin: 54px;
+}
+
+#final-score {
+    font-size: 3rem;
+    margin-top: 50px;
 }
 
 .counter {
