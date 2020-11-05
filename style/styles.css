@@ -166,3 +166,18 @@ header {
     color: black;
     font-size: 0.8rem;
 }
+
+#cursor {
+    width: 5rem;
+    position: absolute;
+    transform: translate(-487px, -130px);
+    pointer-events: none;
+}
+
+.frame {
+    width: 1000px;
+    height: 700px;
+    position: absolute;
+    pointer-events: none;
+    background-color: rgba(0,0,0,0)
+}

@@ -122,7 +122,7 @@ window.addEventListener('load', (event) => {
 
     setButtonFast = () => {
         level.innerHTML = 'SPEED: FAST';
-        time = randomTime(550, 1400);
+        time = randomTime(550, 1200);
     }
 
     setButtonCrazy = () => {
@@ -239,6 +239,7 @@ window.addEventListener('load', (event) => {
         if (buttonRight.className === 'btn-mute' && buttonLeft.className !== 'btn-start') {
             setMuteBtn();
             myMusic.pause();
+            endSound.pause();
         } else if (buttonRight.className === 'btn-unmute') {
             setUnmuteBtn();
             myMusic.play();
@@ -272,4 +273,25 @@ window.addEventListener('load', (event) => {
     buttonRestart.onclick = () => {
         location.reload()
     }
+
+    //      CURSOR
+
+    let mouseCursor = document.querySelector('#cursor');
+
+    window.addEventListener('mousemove', moveCursor);
+
+    function moveCursor(e) {  
+        mouseCursor.style.top = e.pageY + 'px';
+        mouseCursor.style.left = e.pageX + 'px';
+    }
+
+    window.addEventListener('mousedown',() => {
+        mouseCursor.src ='images/hammer2.png';
+    })
+        
+    window.addEventListener('mouseup',() => {
+        mouseCursor.src ='images/hammer.png';
+    })
+        
+    
 });
