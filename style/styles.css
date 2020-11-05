@@ -41,6 +41,11 @@ header {
     padding: 0px 50px;
 }
 
+#level {
+    width: 240px;
+    text-align: center;
+}
+
 #menu {
     position: absolute;
     background-color: rgba(250, 250, 250, 0.4);

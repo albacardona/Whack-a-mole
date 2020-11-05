@@ -38,6 +38,7 @@ window.addEventListener('load', (event) => {
     endSound.volume = 0.1;
 
     let menu = document.getElementById('menu');
+    let level = document.getElementById('level');
 
 
     //      FUNCTIONS
@@ -115,15 +116,18 @@ window.addEventListener('load', (event) => {
     }
 
     setButtonNormal = () => {
+        level.innerHTML = 'SPEED: NORMAL';
         time = randomTime(700, 2000);
     }
 
     setButtonFast = () => {
-        time = randomTime(500, 1500);
+        level.innerHTML = 'SPEED: FAST';
+        time = randomTime(550, 1400);
     }
 
     setButtonCrazy = () => {
-        time = randomTime(400, 900);
+        level.innerHTML = 'SPEED: CRAZY';
+        time = randomTime(400, 800);
     }
 
     //      TIME
@@ -143,7 +147,6 @@ window.addEventListener('load', (event) => {
             selectedTime--;
             console.log(playTime)
             if (selectedTime <= 0) {
-                // endGame = true;
                 clearInterval(interval)
             }
             callback();
@@ -170,7 +173,14 @@ window.addEventListener('load', (event) => {
     //      SCORE
 
     addScore = () => {
-        score += 5;
+        if(level.innerHTML === 'SPEED: NORMAL'){
+            score += 5;
+        } else if (level.innerHTML === 'SPEED: FAST') {
+            score +=10;
+        } else {
+            score+=15;
+        }
+        
         if (score < 10) {
             scoreDiv.textContent = `SCORE: 000${score}`;
         } else if (score < 100 && score >= 10) {
@@ -188,8 +198,9 @@ window.addEventListener('load', (event) => {
     };
 
     //      GAME
-
+    
     startGame = () => {
+        
         startTimer(printTime);
         hideAllMoles();
         setTimeout(() => {
