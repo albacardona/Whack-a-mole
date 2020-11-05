@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WHACK-A-MOLE</title>
 
-    <link rel="stylesheet" href="styles/styles.css" />
+    <link rel="stylesheet" href="style/styles.css" />
 </head>
 
 <body>
@@ -24,20 +24,20 @@
 
         <div class="nav">
             <div class="nav-time">
-                <div id="time" class="counter">TIME: 01:30</div>
+                <div id="time" class="counter">TIME: 00:00</div>
             </div>
-            
+
             <div class="nav-score">
                 <div id="score" class="counter">SCORE: 0000</div>
             </div>
 
-            
+
         </div>
 
-        
+
 
         <div id="moles">
-            
+
             <div class="hole-with-mole">
                 <img class="picture mole" src="images/mole.png" alt="mole">
                 <img class="picture" src="images/hole.png" alt="hole">
@@ -74,35 +74,47 @@
                 <img class="picture mole" src="images/mole.png" alt="mole">
                 <img class="picture" src="images/hole.png" alt="hole">
             </div>
-            
+
         </div>
+
+        <div id="menu">
+            <p>Settings:</p>
+            <div id="settings">
+                <div class="speed">
+                    <input class="btn normal" type="image" src="images/normal.png" alt="start" />
+                    <input class="btn fast" type="image" src="images/fast.png" alt="start" />
+                    <input class="btn crazy" type="image" src="images/crazy.png" alt="start" />
+                </div>
+                <div class="seconds">
+                    <input class="btn 90" type="image" src="images/90.png" alt="start" />
+                    <input class="btn 60" type="image" src="images/60.png" alt="start" />
+                    <input class="btn 30" type="image" src="images/30.png" alt="start" />
+                </div>
+            </div>
+        </div>
+
         <div id="timeup">
             <p>TIME UP!</p>
             <p id="final-score"></p>
             <div class="restart">
-                <input id="button-timeup" class="btn-restart" type="image" src="images/Restart.png" alt="start"/>
+                <input id="button-timeup" class="btn-restart" type="image" src="images/Restart.png" alt="start" />
             </div>
         </div>
 
         <div class="buttons">
             <div class="start">
-                <input id="button-left" class="btn-start" type="image" src="images/Start.png" alt="start"/>
+                <input id="button-left" class="btn-start" type="image" src="images/Start.png" alt="start" />
             </div>
             <div class="mute">
-                <input id="button-right" class="btn-mute" type="image" src="images/Mute.png" alt="mute"/>
+                <input id="button-right" class="btn-mute" type="image" src="images/Mute.png" alt="mute" />
             </div>
         </div>
 
     </section>
 
-    
-
     <footer class="Alba">
         by Alba Cardona 2020
     </footer>
-    
-
-
 
     <script src="script/index.js"></script>
 </body>

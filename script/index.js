@@ -9,25 +9,35 @@ window.addEventListener('load', (event) => {
 
     let buttonLeft = document.getElementById('button-left');
     let buttonRight = document.getElementById('button-right');
-    
+    let buttonRestart = document.getElementById('button-timeup');
+    let buttons = document.getElementsByClassName('btn');
+    let buttonNormal = buttons[0]
+    let buttonFast = buttons[1]
+    let buttonCrazy = buttons[2]
+    let button90 = buttons[3]
+    let button60 = buttons[4]
+    let button30 = buttons[5]
+
+    let time;
     let countdown = document.querySelector('#time');
     let interval = 0;
-    let playTime = 5;
+    let playTime;
+    let selectedTime;
     let timeUp = document.getElementById('timeup');
-    let endGameTime = playTime * 1000;
 
     let scoreDiv = document.getElementById('score');
     let score = 0;
     let totalScore = '';
     let finalScore = document.getElementById('final-score');
 
-    let myMusic = new Audio('images/main-loop.mp3');
+    let myMusic = new Audio('sounds/main-loop.mp3');
     myMusic.volume = 0.1;
-    let smash = new Audio('images/Jump9.mp3');
+    let smash = new Audio('sounds/Jump9.mp3');
     smash.volume = 0.5;
-    let endSound = new Audio('images/timeuponce.mp3');
-    endSound = 0.1;
-    
+    let endSound = new Audio('sounds/timeup.mp3');
+    endSound.volume = 0.1;
+
+    let menu = document.getElementById('menu');
 
 
     //      FUNCTIONS
@@ -48,13 +58,12 @@ window.addEventListener('load', (event) => {
     };
 
     showMoles = () => {
-        let time = randomTime(700, 2000);
         let mole = shuffleMoles();
         mole.style.display = 'block';
         setTimeout(() => {
             mole.style.display = 'none';
             showMoles();
-        }, time)
+        }, time);
     };
 
     hideAllMoles = () => {
@@ -68,13 +77,6 @@ window.addEventListener('load', (event) => {
     setStartBtn = () => {
         buttonLeft.src = 'images/Start2.png'
         buttonLeft.className = 'unclickable';
-        // buttonLeft.src = 'images/Pause.png';
-        // buttonLeft.className = 'btn-pause';
-    };
-
-    setPauseBtn = () => {
-        buttonLeft.src = 'images/Start.png';
-        buttonLeft.className = 'btn-start';
     };
 
     setMuteBtn = () => {
@@ -87,11 +89,48 @@ window.addEventListener('load', (event) => {
         buttonRight.className = 'btn-mute';
     };
 
+    closeMenu = () => {
+        menu.style.display = 'none';
+    }
+
+    setButton90 = () => {
+        countdown.innerHTML = 'TIME: 01:30';
+        playTime = 90;
+        selectedTime = playTime
+        return selectedTime;
+    }
+
+    setButton60 = () => {
+        countdown.innerHTML = 'TIME: 01:00';
+        playTime = 60;
+        selectedTime = playTime
+        return selectedTime;
+    }
+
+    setButton30 = () => {
+        countdown.innerHTML = 'TIME: 00:30';
+        playTime = 30;
+        selectedTime = playTime
+        return selectedTime;
+    }
+
+    setButtonNormal = () => {
+        time = randomTime(700, 2000);
+    }
+
+    setButtonFast = () => {
+        time = randomTime(500, 1500);
+    }
+
+    setButtonCrazy = () => {
+        time = randomTime(400, 900);
+    }
+
     //      TIME
 
     printTime = () => {
-        let minutes = Math.floor(playTime / 60)
-        let seconds = playTime % 60
+        let minutes = Math.floor(selectedTime / 60)
+        let seconds = selectedTime % 60
 
         minutes = minutes < 10 ? "0" + minutes : minutes;
         seconds = seconds < 10 ? "0" + seconds : seconds;
@@ -101,9 +140,10 @@ window.addEventListener('load', (event) => {
 
     startTimer = (callback) => {
         interval = setInterval(() => {
-            playTime--;
-            if(playTime === 0) {
-                endGame = true;
+            selectedTime--;
+            console.log(playTime)
+            if (selectedTime <= 0) {
+                // endGame = true;
                 clearInterval(interval)
             }
             callback();
@@ -116,9 +156,16 @@ window.addEventListener('load', (event) => {
         timeUp.className = 'game-finished';
         timeUp.removeAttribute('id');
         finalScore.textContent = scoreDiv.textContent;
-        endSound.play();
         myMusic.pause();
-    };
+        endSound.play();
+    }
+
+    removeTimeup = () => {
+        timeUp.removeAttribute('class');
+        timeUp.setAttribute('id', 'timeup');
+        myMusic.play();
+        endSound.pause();
+    }
 
     //      SCORE
 
@@ -140,47 +187,41 @@ window.addEventListener('load', (event) => {
         lastMole.style.display = 'none';
     };
 
-
     //      GAME
 
     startGame = () => {
-        score = 0;
         startTimer(printTime);
         hideAllMoles();
         setTimeout(() => {
             showMoles();
         }, 500)
-        setTimeout(endGame, endGameTime)
+
+        setTimeout(() => {
+            finishGame();
+        }, selectedTime * 1000)
     };
 
-    endGame = () => {
-        clearTimeout()
+    finishGame = () => {
         hideAllMoles();
         timeup();
     }
-
 
     //      BUTTONS
 
     moles.forEach((mole) => {
         mole.onclick = () => {
             whackMole();
-            if(buttonRight.className === 'btn-mute') {
+            if (buttonRight.className === 'btn-mute') {
                 smash.play();
             }
         };
     });
 
     buttonLeft.onclick = () => {
-        if (buttonLeft.className === 'btn-start') {
-            startGame();
-            setStartBtn();
-            myMusic.play();
-            // } else if (buttonLeft.className === 'btn-pause') {
-            //     setPauseBtn();
-            //     setUnmuteBtn();
-            //     myMusic.pause();
-        }
+        startGame();
+        setStartBtn();
+        closeMenu();
+        myMusic.play();
     };
 
     buttonRight.onclick = () => {
@@ -192,4 +233,32 @@ window.addEventListener('load', (event) => {
             myMusic.play();
         }
     };
+
+    button90.onclick = () => {
+        setButton90();
+    };
+
+    button60.onclick = () => {
+        setButton60();
+    }
+
+    button30.onclick = () => {
+        setButton30();
+    }
+
+    buttonNormal.onclick = () => {
+        setButtonNormal();
+    }
+
+    buttonFast.onclick = () => {
+        setButtonFast();
+    }
+
+    buttonCrazy.onclick = () => {
+        setButtonCrazy();
+    }
+
+    buttonRestart.onclick = () => {
+        location.reload()
+    }
 });
