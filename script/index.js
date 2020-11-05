@@ -76,7 +76,7 @@ window.addEventListener('load', (event) => {
     //      SET BUTTONS
 
     setStartBtn = () => {
-        buttonLeft.src = 'images/Start2.png'
+        buttonLeft.src = 'images/Start2.png';
         buttonLeft.className = 'unclickable';
     };
 
@@ -198,9 +198,8 @@ window.addEventListener('load', (event) => {
     };
 
     //      GAME
-    
+
     startGame = () => {
-        
         startTimer(printTime);
         hideAllMoles();
         setTimeout(() => {
@@ -292,6 +291,4 @@ window.addEventListener('load', (event) => {
     window.addEventListener('mouseup',() => {
         mouseCursor.src ='images/hammer.png';
     })
-        
-    
 });

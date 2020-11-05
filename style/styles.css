@@ -170,14 +170,7 @@ header {
 #cursor {
     width: 5rem;
     position: absolute;
-    transform: translate(-487px, -130px);
+    transform: translate(-35%, -35%);
     pointer-events: none;
 }
 
-.frame {
-    width: 1000px;
-    height: 700px;
-    position: absolute;
-    pointer-events: none;
-    background-color: rgba(0,0,0,0)
-}
