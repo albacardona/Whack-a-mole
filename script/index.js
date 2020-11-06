@@ -21,7 +21,7 @@ window.addEventListener('load', (event) => {
     let time;
     let countdown = document.querySelector('#time');
     let interval = 0;
-    let playTime;
+    let playTime = 60;
     let selectedTime;
     let timeUp = document.getElementById('timeup');
 
@@ -97,6 +97,8 @@ window.addEventListener('load', (event) => {
     setButton90 = () => {
         countdown.innerHTML = 'TIME: 01:30';
         playTime = 90;
+        buttonLeft.src = 'images/Start.png';
+        buttonLeft.className = 'btn-start';
         selectedTime = playTime
         return selectedTime;
     }
@@ -104,6 +106,8 @@ window.addEventListener('load', (event) => {
     setButton60 = () => {
         countdown.innerHTML = 'TIME: 01:00';
         playTime = 60;
+        buttonLeft.src = 'images/Start.png';
+        buttonLeft.className = 'btn-start';
         selectedTime = playTime
         return selectedTime;
     }
@@ -111,6 +115,8 @@ window.addEventListener('load', (event) => {
     setButton30 = () => {
         countdown.innerHTML = 'TIME: 00:30';
         playTime = 30;
+        buttonLeft.src = 'images/Start.png';
+        buttonLeft.className = 'btn-start';
         selectedTime = playTime
         return selectedTime;
     }
@@ -228,10 +234,15 @@ window.addEventListener('load', (event) => {
     });
 
     buttonLeft.onclick = () => {
-        startGame();
-        setStartBtn();
-        closeMenu();
-        myMusic.play();
+        if(buttonLeft.className === 'btn-start') {
+            startGame();
+            setStartBtn();
+            closeMenu();
+            myMusic.play();
+        } else {
+            buttonLeft.className !== 'unclickable';
+        }
+        
     };
 
     buttonRight.onclick = () => {
