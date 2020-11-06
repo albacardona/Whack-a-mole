@@ -97,8 +97,10 @@ window.addEventListener('load', (event) => {
     setButton90 = () => {
         countdown.innerHTML = 'TIME: 01:30';
         playTime = 90;
-        buttonLeft.src = 'images/Start.png';
-        buttonLeft.className = 'btn-start';
+        if(countdown.innerHTML !== 'TIME: __:__' && level.innerHTML !== 'SPEED: _____') {
+            buttonLeft.src = 'images/Start.png';
+            buttonLeft.className = 'btn-start';
+        }
         selectedTime = playTime
         return selectedTime;
     }
@@ -106,8 +108,10 @@ window.addEventListener('load', (event) => {
     setButton60 = () => {
         countdown.innerHTML = 'TIME: 01:00';
         playTime = 60;
-        buttonLeft.src = 'images/Start.png';
-        buttonLeft.className = 'btn-start';
+        if(countdown.innerHTML !== 'TIME: __:__' && level.innerHTML !== 'SPEED: _____') {
+            buttonLeft.src = 'images/Start.png';
+            buttonLeft.className = 'btn-start';
+        }
         selectedTime = playTime
         return selectedTime;
     }
@@ -115,8 +119,10 @@ window.addEventListener('load', (event) => {
     setButton30 = () => {
         countdown.innerHTML = 'TIME: 00:30';
         playTime = 30;
-        buttonLeft.src = 'images/Start.png';
-        buttonLeft.className = 'btn-start';
+        if(countdown.innerHTML !== 'TIME: __:__' && level.innerHTML !== 'SPEED: _____') {
+            buttonLeft.src = 'images/Start.png';
+            buttonLeft.className = 'btn-start';
+        }
         selectedTime = playTime
         return selectedTime;
     }
@@ -124,16 +130,28 @@ window.addEventListener('load', (event) => {
     setButtonNormal = () => {
         level.innerHTML = 'SPEED: NORMAL';
         time = randomTime(700, 2000);
+        if(countdown.innerHTML !== 'TIME: __:__' && level.innerHTML !== 'SPEED: _____') {
+            buttonLeft.src = 'images/Start.png';
+            buttonLeft.className = 'btn-start';
+        }
     }
 
     setButtonFast = () => {
         level.innerHTML = 'SPEED: FAST';
         time = randomTime(550, 1200);
+        if(countdown.innerHTML !== 'TIME: __:__' && level.innerHTML !== 'SPEED: _____') {
+            buttonLeft.src = 'images/Start.png';
+            buttonLeft.className = 'btn-start';
+        }
     }
 
     setButtonCrazy = () => {
         level.innerHTML = 'SPEED: CRAZY';
         time = randomTime(400, 800);
+        if(countdown.innerHTML !== 'TIME: __:__' && level.innerHTML !== 'SPEED: _____') {
+            buttonLeft.src = 'images/Start.png';
+            buttonLeft.className = 'btn-start';
+        }
     }
 
     //      TIME
@@ -234,13 +252,14 @@ window.addEventListener('load', (event) => {
     });
 
     buttonLeft.onclick = () => {
-        if(buttonLeft.className === 'btn-start') {
+        if(countdown.innerHTML !== 'TIME: __:__' && level.innerHTML !== 'SPEED: _____') {
             startGame();
             setStartBtn();
             closeMenu();
             myMusic.play();
         } else {
             buttonLeft.className !== 'unclickable';
+            buttonLeft.src = 'images/Start2.png';
         }
         
     };
