@@ -44,11 +44,11 @@ window.addEventListener('load', (event) => {
     //      FUNCTIONS
     //      MOLES
 
-    randomTime = (min, max) => {
+    let randomTime = (min, max) => {
         return Math.round(Math.random() * (max - min) + min)
     };
 
-    shuffleMoles = () => {
+    let shuffleMoles = () => {
         mixedMoles = moles.sort((a, b) => 0.5 - Math.random());
         currentMole = mixedMoles[0];
         if (currentMole === lastMole) {
@@ -58,7 +58,7 @@ window.addEventListener('load', (event) => {
         return currentMole;
     };
 
-    showMoles = () => {
+    let showMoles = () => {
         let mole = shuffleMoles();
         mole.style.display = 'block';
         setTimeout(() => {
@@ -67,7 +67,7 @@ window.addEventListener('load', (event) => {
         }, time);
     };
 
-    hideAllMoles = () => {
+    let hideAllMoles = () => {
         moles.forEach((mole) => {
             mole.style.display = 'none';
         });
@@ -75,26 +75,26 @@ window.addEventListener('load', (event) => {
 
     //      SET BUTTONS
 
-    setStartBtn = () => {
+    let setStartBtn = () => {
         buttonLeft.src = 'images/Start2.png';
         buttonLeft.className = 'unclickable';
     };
 
-    setMuteBtn = () => {
+    let setMuteBtn = () => {
         buttonRight.src = 'images/Unmute.png';
         buttonRight.className = 'btn-unmute';
     };
 
-    setUnmuteBtn = () => {
+    let setUnmuteBtn = () => {
         buttonRight.src = 'images/Mute.png';
         buttonRight.className = 'btn-mute';
     };
 
-    closeMenu = () => {
+    let closeMenu = () => {
         menu.style.display = 'none';
     }
 
-    setButton90 = () => {
+    let setButton90 = () => {
         countdown.innerHTML = 'TIME: 01:30';
         playTime = 90;
         if(countdown.innerHTML !== 'TIME: __:__' && level.innerHTML !== 'SPEED: _____') {
@@ -105,7 +105,7 @@ window.addEventListener('load', (event) => {
         return selectedTime;
     }
 
-    setButton60 = () => {
+    let setButton60 = () => {
         countdown.innerHTML = 'TIME: 01:00';
         playTime = 60;
         if(countdown.innerHTML !== 'TIME: __:__' && level.innerHTML !== 'SPEED: _____') {
@@ -116,7 +116,7 @@ window.addEventListener('load', (event) => {
         return selectedTime;
     }
 
-    setButton30 = () => {
+    let setButton30 = () => {
         countdown.innerHTML = 'TIME: 00:30';
         playTime = 30;
         if(countdown.innerHTML !== 'TIME: __:__' && level.innerHTML !== 'SPEED: _____') {
@@ -127,7 +127,7 @@ window.addEventListener('load', (event) => {
         return selectedTime;
     }
 
-    setButtonNormal = () => {
+    let setButtonNormal = () => {
         level.innerHTML = 'SPEED: NORMAL';
         time = randomTime(700, 2000);
         if(countdown.innerHTML !== 'TIME: __:__' && level.innerHTML !== 'SPEED: _____') {
@@ -136,7 +136,7 @@ window.addEventListener('load', (event) => {
         }
     }
 
-    setButtonFast = () => {
+    let setButtonFast = () => {
         level.innerHTML = 'SPEED: FAST';
         time = randomTime(550, 1200);
         if(countdown.innerHTML !== 'TIME: __:__' && level.innerHTML !== 'SPEED: _____') {
@@ -145,7 +145,7 @@ window.addEventListener('load', (event) => {
         }
     }
 
-    setButtonCrazy = () => {
+    let setButtonCrazy = () => {
         level.innerHTML = 'SPEED: CRAZY';
         time = randomTime(400, 800);
         if(countdown.innerHTML !== 'TIME: __:__' && level.innerHTML !== 'SPEED: _____') {
@@ -156,7 +156,7 @@ window.addEventListener('load', (event) => {
 
     //      TIME
 
-    printTime = () => {
+    let printTime = () => {
         let minutes = Math.floor(selectedTime / 60)
         let seconds = selectedTime % 60
 
@@ -166,7 +166,7 @@ window.addEventListener('load', (event) => {
         countdown.textContent = `TIME: ${minutes}:${seconds}`
     };
 
-    startTimer = (callback) => {
+    let startTimer = (callback) => {
         interval = setInterval(() => {
             selectedTime--;
             console.log(playTime)
@@ -179,7 +179,7 @@ window.addEventListener('load', (event) => {
 
     };
 
-    timeup = () => {
+    let timeup = () => {
         timeUp.className = 'game-finished';
         timeUp.removeAttribute('id');
         finalScore.textContent = scoreDiv.textContent;
@@ -187,16 +187,9 @@ window.addEventListener('load', (event) => {
         endSound.play();
     }
 
-    removeTimeup = () => {
-        timeUp.removeAttribute('class');
-        timeUp.setAttribute('id', 'timeup');
-        myMusic.play();
-        endSound.pause();
-    }
-
     //      SCORE
 
-    addScore = () => {
+    let addScore = () => {
         if(level.innerHTML === 'SPEED: NORMAL'){
             score += 5;
         } else if (level.innerHTML === 'SPEED: FAST') {
@@ -216,14 +209,14 @@ window.addEventListener('load', (event) => {
         return totalScore;
     };
 
-    whackMole = () => {
+    let whackMole = () => {
         addScore()
         lastMole.style.display = 'none';
     };
 
     //      GAME
 
-    startGame = () => {
+    let startGame = () => {
         startTimer(printTime);
         hideAllMoles();
         setTimeout(() => {
@@ -235,7 +228,7 @@ window.addEventListener('load', (event) => {
         }, selectedTime * 1000)
     };
 
-    finishGame = () => {
+    let finishGame = () => {
         hideAllMoles();
         timeup();
     }
