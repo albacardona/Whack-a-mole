@@ -11,4 +11,8 @@ The crazy level might be too fast, don't worry if you don't get any point at the
 
 ---
 
+You can find in this repo the presentation I did in spanish for the class.
+
+---
+
 **Contact** - [LinkedIn](https://www.linkedin.com/in/albacardonajimenez/) - [Mail](mailto:alba.cardonajimenez@gmail.com) - [GitHub](https://github.com/albacardona)
