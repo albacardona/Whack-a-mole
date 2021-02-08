@@ -112,6 +112,7 @@ header {
 
 .unclickable {
     opacity: 0.9;
+    pointer-events: none;
 }
 
 .game-area {

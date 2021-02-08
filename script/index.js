@@ -315,3 +315,7 @@ window.addEventListener('load', (event) => {
         mouseCursor.src ='images/hammer.png';
     })
 });
+
+/* 
+TODO: clean the code
+*/
