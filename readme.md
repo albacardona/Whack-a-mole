@@ -11,7 +11,7 @@ The crazy level might be too fast, don't worry if you don't get any point at the
 
 ---
 
-You can find in this repo the presentation I did in spanish for the class.
+You can find in this repo the [presentation](https://github.com/albacardona/Whack-a-mole/blob/master/Whack-a-mole-Presentation.pdf) I did in spanish for the class.
 
 ---
 
