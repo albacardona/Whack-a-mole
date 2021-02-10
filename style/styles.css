@@ -7,6 +7,7 @@
     font-family: 'Press Start 2P';
     color: #FFF8EB;
     box-sizing: border-box;
+    cursor: none;
 }
 
 body {
@@ -154,15 +155,6 @@ header {
     display: block;
 }
 
-.noselect {
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-    -khtml-user-select: none; /* Konqueror HTML */
-    -moz-user-select: none; /* Old versions of Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */
-    user-select: none;
-}
-
 .buttons {
     width: 700px;
     display: flex;
@@ -186,6 +178,16 @@ header {
     position: absolute;
     transform: translate(-35%, -35%);
     pointer-events: none;
+
+}
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
 }
 
 @media

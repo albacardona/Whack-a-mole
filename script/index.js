@@ -184,7 +184,10 @@ window.addEventListener('load', (event) => {
         timeUp.removeAttribute('id');
         finalScore.textContent = scoreDiv.textContent;
         myMusic.pause();
-        endSound.play();
+
+        if(buttonRight.className === 'btn-mute'){
+            endSound.play();
+        }
     }
 
     //      SCORE
